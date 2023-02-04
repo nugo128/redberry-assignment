@@ -1,11 +1,8 @@
 import React from "react";
+import CV from "../Components/CV";
 
 function ExperiencePage() {
-  return (
-    <div>
-      <p>{localStorage.getItem("inputedFirstname2")}</p>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default ExperiencePage;

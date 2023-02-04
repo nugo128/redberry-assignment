@@ -7,7 +7,7 @@
   background-color: #0e80bf;
   border-radius: 4px;
 }
-.maincontainer {
+.formcontainer {
   padding: 50px 150px;
   width: 1100px;
   background-color: #f9f9f9;
@@ -143,4 +143,7 @@
   height: 40px;
   background-color: #fff;
   border-radius: 50%;
+}
+.maincontainer {
+  display: flex;
 }

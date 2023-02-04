@@ -1,0 +1,48 @@
+* {
+  font-family: "Helvetica Neue";
+}
+
+.firstname,
+.lastname {
+  color: #f93b1d;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.firstlast {
+  display: flex;
+  gap: 20px;
+}
+.maincontainer {
+  padding: 60px 75px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.img {
+  width: 245px;
+  height: 245px;
+  border: none;
+}
+.mail {
+  margin: 20px 0 10px 0;
+}
+.mail,
+.phone {
+  display: flex;
+  gap: 12px;
+  font-weight: 400;
+  font-size: 18px;
+}
+.aboutme {
+  color: #f93b1d;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 35px 0 15px 0;
+}
+.basicinfo {
+  font-size: 16px;
+  font-weight: 400;
+  width: 410px;
+  word-wrap: break-word;
+}
