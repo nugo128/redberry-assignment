@@ -1,7 +1,11 @@
 import React from "react";
 
 function ExperiencePage() {
-  return <div>ExperiencePage</div>;
+  return (
+    <div>
+      <p>{localStorage.getItem("inputedFirstname2")}</p>
+    </div>
+  );
 }
 
 export default ExperiencePage;

@@ -10,7 +10,7 @@ function StartingPage() {
       <img className={classes.redberryLogo} src={redberryLogo} alt="logo" />
       <div className={classes.line}></div>
       <img className={classes.logo2} src={logo2} alt="logo" />
-      <Link to={"/form/personal"} className={classes.btn}>
+      <Link to={"/personal"} className={classes.btn}>
         <p>რეზიუმეს დამატება</p>
       </Link>
     </div>
