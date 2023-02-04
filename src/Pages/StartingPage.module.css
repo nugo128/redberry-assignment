@@ -1,0 +1,37 @@
+.main {
+  background-image: url("../images/background-image.jpg");
+  width: 1920px;
+  height: 1080px;
+}
+.redberryLogo {
+  width: 236px;
+  height: 38px;
+  margin-top: 25px;
+  margin-left: 70px;
+}
+.line {
+  margin: 26px 70px;
+  with: 100%;
+  border: 0.5px solid #1a1a1a;
+}
+.logo2 {
+  position: absolute;
+  width: 299px;
+  top: 473px;
+  left: 1076px;
+}
+.btn {
+  position: absolute;
+  width: 464px;
+  height: 60px;
+  color: #fff;
+  background: #1a1a1a;
+  border-radius: 8px;
+  top: 513px;
+  left: 728px;
+  text-decoration: none;
+}
+.btn p {
+  text-align: center;
+  margin-top: 20px;
+}
