@@ -150,6 +150,7 @@ function PersonalPage(props) {
         basicinfo={localStorage.getItem("basicinfo")}
         email={localStorage.getItem("email")}
         number={localStorage.getItem("number")}
+        data={Object.keys(localStorage)}
       ></CV>
     </main>
   );

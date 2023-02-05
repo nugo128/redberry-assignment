@@ -8,7 +8,7 @@ function ExperienceForm(props) {
       <div className={classes.position}>
         <label htmlFor="positionInput">თანამდებობა</label>
         <input
-          name="positionInput"
+          name={`positionInput${props.index}`}
           type="text"
           onChange={props.changeHandler}
           placeholder="დეველოპერი, დიზაინერი, ა.შ"
@@ -19,7 +19,7 @@ function ExperienceForm(props) {
       <div className={classes.employer}>
         <label htmlFor="employerInput">დამსაქმებელი</label>
         <input
-          name={`employer`}
+          name={`employer${props.index}`}
           type="text"
           onChange={props.changeHandler}
           placeholder="დამსაქმებელი"
@@ -32,7 +32,7 @@ function ExperienceForm(props) {
           <label htmlFor="startDate">დაწყების რიცხვი</label>
           <input
             type="date"
-            name="startDate"
+            name={`startDate${props.index}`}
             id="startDate"
             onChange={props.changeHandler}
           />
@@ -41,7 +41,7 @@ function ExperienceForm(props) {
           <label htmlFor="endDate">დამთავრების რიცხვი</label>
           <input
             type="date"
-            name="endDate"
+            name={`endDate${props.index}`}
             id="endDate"
             onChange={props.changeHandler}
           />
@@ -51,12 +51,13 @@ function ExperienceForm(props) {
       <div className={classes.description}>
         <label htmlFor="description">აღწერა</label>
         <textarea
-          name="description"
+          name={`description${props.index}`}
           id="description"
           onChange={props.changeHandler}
           placeholder="როლი თანამდებოდაზე და ზოგადი აღწერა"
         ></textarea>
       </div>
+      <div className={classes.line}></div>
     </form>
   );
 }

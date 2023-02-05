@@ -5,6 +5,11 @@ import star from "../images/star.png";
 import Line from "./Line";
 
 function CV(props) {
+  console.log(props.data);
+
+  // props.data?.map((e) => {
+  //   console.log(localStorage.getItem(e));
+  // });
   return (
     <div className={classes.maincontainer}>
       <div className={classes.cont2}>

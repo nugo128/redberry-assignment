@@ -51,3 +51,6 @@
 .description textarea {
   height: 125px;
 }
+.line {
+  border: 1px solid #c1c1c1;
+}

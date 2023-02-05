@@ -32,3 +32,35 @@
   justify-content: space-between;
   margin-bottom: 12px;
 }
+.btnadd {
+  background-color: #62a1eb;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  width: 290px;
+  height: 50px;
+  margin-top: 50px;
+}
+.links {
+  margin-top: 120px;
+  display: flex;
+  justify-content: space-between;
+}
+.nextLink,
+.backLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #6b40e3;
+  width: 150px;
+  height: 50px;
+  border-radius: 4px;
+}
+.nextLink span,
+.backLink span {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
