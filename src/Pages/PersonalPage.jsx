@@ -49,21 +49,15 @@ function PersonalPage(props) {
     };
     window.location.reload();
   }
+  const backClickHandler = () => {
+    localStorage.clear();
+  };
 
-  {
-    /* {file ? (
-          <img src={URL.createObjectURL(file)} alt="www" />
-        ) : (
-          <p>no image</p>
-        )} */
-  }
-
-  let data = localStorage.getItem("inputedFirstname");
   return (
     <main className={classes.maincontainer}>
       <section className={classes.formcontainer}>
         <section className={classes.header}>
-          <Link to={"/"} className={classes.svg}>
+          <Link to={"/"} className={classes.svg} onClick={backClickHandler}>
             <SVG></SVG>
           </Link>
           <div className={classes.pagename}>

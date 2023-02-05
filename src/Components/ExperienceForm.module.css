@@ -1,0 +1,53 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 85px;
+}
+.position,
+.employer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.position input,
+.employer input {
+  height: 48px;
+}
+
+.position label,
+.employer label,
+.startdate label,
+.enddate label,
+.description label {
+  font-weight: 500;
+}
+.position p,
+.employer p {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.date {
+  display: flex;
+  justify-content: space-between;
+}
+.startdate,
+.enddate {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.startdate input,
+.enddate input {
+  width: 370px;
+  height: 50px;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.description textarea {
+  height: 125px;
+}
