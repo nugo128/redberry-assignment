@@ -14,7 +14,6 @@
   gap: 20px;
 }
 .maincontainer {
-  padding: 60px 75px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -50,12 +49,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-.star {
-  justify-self: flex-end;
-  align-self: flex-start;
-  width: 42px;
-  height: 42px;
 }
 .cont3 {
   display: flex;

@@ -4,12 +4,13 @@ import CV from "../Components/CV";
 import Line from "../Components/Line";
 import { Link } from "react-router-dom";
 import SVG from "../Components/SVG";
-
+import ExperienceCV from "../Components/ExperienceCV";
+import star from "../images/star.png";
 function PersonalPage(props) {
   const [input, setInput] = useState({});
 
   const [file, setFile] = useState(null);
-  const [photoUrl, setPhotoUrl] = useState(null);
+  let arr = [];
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -52,6 +53,8 @@ function PersonalPage(props) {
   const backClickHandler = () => {
     localStorage.clear();
   };
+
+  // let a =  /^\+995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/ tel validation
 
   return (
     <main className={classes.maincontainer}>
@@ -143,15 +146,39 @@ function PersonalPage(props) {
         {/* <p>{localStorage.getItem("inputedFirstname2")}</p> */}
         {/* <p>{data}</p> */}
       </section>
-      <CV
-        firstname={localStorage.getItem("inputedFirstname")}
-        lastname={localStorage.getItem("inputedLastname")}
-        image={localStorage.getItem("photo")}
-        basicinfo={localStorage.getItem("basicinfo")}
-        email={localStorage.getItem("email")}
-        number={localStorage.getItem("number")}
-        data={Object.keys(localStorage)}
-      ></CV>
+      <div className="cv-container">
+        <div>
+          <CV
+            firstname={localStorage.getItem("inputedFirstname")}
+            lastname={localStorage.getItem("inputedLastname")}
+            image={localStorage.getItem("photo")}
+            basicinfo={localStorage.getItem("basicinfo")}
+            email={localStorage.getItem("email")}
+            number={localStorage.getItem("number")}
+            data={Object.keys(localStorage)}
+          ></CV>
+
+          {
+            (arr = Array(Number(localStorage.getItem("i")))
+              .fill(1)
+              .map((_, index) => (
+                <>
+                  {
+                    <ExperienceCV
+                      position={localStorage.getItem(`positionInfo${index}`)}
+                      employer={localStorage.getItem(`employer${index}`)}
+                      startdate={localStorage.getItem(`startDate${index}`)}
+                      enddate={localStorage.getItem(`endDate${index}`)}
+                      description={localStorage.getItem(`description${index}`)}
+                      index={index}
+                    ></ExperienceCV>
+                  }
+                </>
+              )))
+          }
+        </div>
+        <img className={classes.star} src={star} alt="" />
+      </div>
     </main>
   );
 }

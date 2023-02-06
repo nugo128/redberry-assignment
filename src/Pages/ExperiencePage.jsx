@@ -7,13 +7,17 @@ import SVG from "../Components/SVG";
 import ExperienceForm from "../Components/ExperienceForm";
 import { useState } from "react";
 import ExperienceCV from "../Components/ExperienceCV";
-
+import star from "../images/star.png";
 function ExperiencePage() {
   let arr = [];
   const [input, setInput] = useState({});
-  const [formCount, setFormCount] = useState(1);
+  const [formCount, setFormCount] = useState(Number(localStorage.getItem("i")));
   const [experienceData, setExperienceData] = useState({});
   const [keys, setKeys] = useState([]);
+
+  if (!Number(localStorage.getItem("i"))) {
+    setFormCount(1);
+  }
 
   const backClickHandler = () => {
     localStorage.clear();
@@ -92,33 +96,37 @@ function ExperiencePage() {
           </Link>
         </div>
       </section>
-      <div>
-        <CV
-          firstname={localStorage.getItem("inputedFirstname")}
-          lastname={localStorage.getItem("inputedLastname")}
-          image={localStorage.getItem("photo")}
-          basicinfo={localStorage.getItem("basicinfo")}
-          email={localStorage.getItem("email")}
-          number={localStorage.getItem("number")}
-          // data={Object.keys(localStorage)}
-        ></CV>
-        {
-          (arr = Array(Number(localStorage.getItem("i")))
-            .fill(1)
-            .map((_, index) => (
-              <>
-                {
-                  <ExperienceCV
-                    position={localStorage.getItem(`positionInfo${index}`)}
-                    employer={localStorage.getItem(`employer${index}`)}
-                    startdate={localStorage.getItem(`startDate${index}`)}
-                    enddate={localStorage.getItem(`endDate${index}`)}
-                    description={localStorage.getItem(`description${index}`)}
-                  ></ExperienceCV>
-                }
-              </>
-            )))
-        }
+      <div className="cv-container">
+        <div>
+          <CV
+            firstname={localStorage.getItem("inputedFirstname")}
+            lastname={localStorage.getItem("inputedLastname")}
+            image={localStorage.getItem("photo")}
+            basicinfo={localStorage.getItem("basicinfo")}
+            email={localStorage.getItem("email")}
+            number={localStorage.getItem("number")}
+            data={Object.keys(localStorage)}
+          ></CV>
+          {
+            (arr = Array(Number(localStorage.getItem("i")))
+              .fill(1)
+              .map((_, index) => (
+                <>
+                  {
+                    <ExperienceCV
+                      position={localStorage.getItem(`positionInfo${index}`)}
+                      employer={localStorage.getItem(`employer${index}`)}
+                      startdate={localStorage.getItem(`startDate${index}`)}
+                      enddate={localStorage.getItem(`endDate${index}`)}
+                      description={localStorage.getItem(`description${index}`)}
+                      index={index}
+                    ></ExperienceCV>
+                  }
+                </>
+              )))
+          }
+        </div>
+        <img className={classes.star} src={star} alt="" />
       </div>
     </main>
   );

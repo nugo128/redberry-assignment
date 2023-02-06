@@ -147,3 +147,9 @@
 .maincontainer {
   display: flex;
 }
+.star {
+  justify-self: flex-end;
+  align-self: flex-start;
+  width: 42px;
+  height: 42px;
+}
