@@ -32,8 +32,8 @@ function ExperiencePage() {
     for (let i = 0; i < arr.length; i++) {
       if (input[`positionInput${i}`]) {
         localStorage.setItem(`positionInfo${i}`, input[`positionInput${i}`]);
-        setExperienceData(localStorage.getItem(`positionInfo${i}`));
-        console.log(experienceData);
+        // setExperienceData(localStorage.getItem(`positionInfo${i}`));
+        // console.log(experienceData);
       }
       if (input[`employer${i}`]) {
         localStorage.setItem(`employer${i}`, input[`employer${i}`]);
