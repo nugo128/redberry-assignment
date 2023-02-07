@@ -13,6 +13,11 @@
 }
 .place input {
   height: 50px;
+  /* border-color: red;
+  background: url("../images/star.png");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px; */
 }
 .place label,
 .degree label,
@@ -35,6 +40,6 @@
   height: 180px;
 }
 .line {
-  margin-top: 40px;
+  margin: 20px 0 40px 0;
   border: 1px solid #c1c1c1;
 }

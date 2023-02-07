@@ -36,6 +36,7 @@ function EducationForm(props) {
             name={`degree${props.index}`}
             id=""
             onChange={props.changeHandler}
+            className={classes.select}
           >
             <option value="">აირჩიეთ ხარისხი</option>
             {places.map((option) => (

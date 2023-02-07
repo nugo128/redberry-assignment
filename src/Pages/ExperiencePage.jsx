@@ -8,8 +8,11 @@ import ExperienceForm from "../Components/ExperienceForm";
 import { useState } from "react";
 import ExperienceCV from "../Components/ExperienceCV";
 import star from "../images/star.png";
+import EducationCV from "../Components/EducationCV";
+
 function ExperiencePage() {
   let arr = [];
+  let arr2 = [];
   const [input, setInput] = useState({});
   const [formCount, setFormCount] = useState(Number(localStorage.getItem("i")));
   const [experienceData, setExperienceData] = useState({});
@@ -121,6 +124,25 @@ function ExperiencePage() {
                       description={localStorage.getItem(`description${index}`)}
                       index={index}
                     ></ExperienceCV>
+                  }
+                </>
+              )))
+          }
+          {
+            (arr2 = Array(Number(localStorage.getItem("j")))
+              .fill(1)
+              .map((_, index) => (
+                <>
+                  {
+                    <EducationCV
+                      place={localStorage.getItem(`place${index}`)}
+                      degree={localStorage.getItem(`degree${index}`)}
+                      finishDate={localStorage.getItem(`finishDate${index}`)}
+                      description={localStorage.getItem(
+                        `educationDescription${index}`
+                      )}
+                      index={index}
+                    ></EducationCV>
                   }
                 </>
               )))

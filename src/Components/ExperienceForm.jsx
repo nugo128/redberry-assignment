@@ -23,6 +23,7 @@ function ExperienceForm(props) {
           type="text"
           onChange={props.changeHandler}
           placeholder="დამსაქმებელი"
+          value={localStorage.getItem(`employer${props.index}`)}
           required
         />
         <p>მინუმუმ 2 სიმბოო</p>

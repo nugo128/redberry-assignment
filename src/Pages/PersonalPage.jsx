@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import classes from "./PersonalPage.module.css";
 import CV from "../Components/CV";
 import Line from "../Components/Line";
@@ -6,11 +7,13 @@ import { Link } from "react-router-dom";
 import SVG from "../Components/SVG";
 import ExperienceCV from "../Components/ExperienceCV";
 import star from "../images/star.png";
+import EducationCV from "../Components/EducationCV";
 function PersonalPage(props) {
   const [input, setInput] = useState({});
-
+  const { register, handleSubmit, errors } = useForm();
   const [file, setFile] = useState(null);
   let arr = [];
+  let arr2 = [];
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -21,7 +24,7 @@ function PersonalPage(props) {
       ...input,
       [e.target.name]: e.target.value,
     });
-    console.log(input);
+    console.log(errors);
   };
 
   if (input.nameInput) {
@@ -78,7 +81,7 @@ function PersonalPage(props) {
                 type="text"
                 onChange={changeHandler}
                 placeholder="ანზორ"
-                required
+                defaultValue={localStorage.getItem("inputedFirstname")}
               />
               <p>მინუმუმ 2 ასო, ქართული ასოები</p>
             </div>
@@ -172,6 +175,25 @@ function PersonalPage(props) {
                       description={localStorage.getItem(`description${index}`)}
                       index={index}
                     ></ExperienceCV>
+                  }
+                </>
+              )))
+          }
+          {
+            (arr2 = Array(Number(localStorage.getItem("j")))
+              .fill(1)
+              .map((_, index) => (
+                <>
+                  {
+                    <EducationCV
+                      place={localStorage.getItem(`place${index}`)}
+                      degree={localStorage.getItem(`degree${index}`)}
+                      finishDate={localStorage.getItem(`finishDate${index}`)}
+                      description={localStorage.getItem(
+                        `educationDescription${index}`
+                      )}
+                      index={index}
+                    ></EducationCV>
                   }
                 </>
               )))

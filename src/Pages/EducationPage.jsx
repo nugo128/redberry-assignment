@@ -4,9 +4,14 @@ import classes from "./EducationPage.module.css";
 import { Link } from "react-router-dom";
 import Line from "../Components/Line";
 import SVG from "../Components/SVG";
+import CV from "../Components/CV";
+import ExperienceCV from "../Components/ExperienceCV";
+import star from "../images/star.png";
+import EducationCV from "../Components/EducationCV";
 
 function EducationPage() {
   let arr = [];
+  let arr2 = [];
   const [input, setInput] = useState({});
   const [formCount, setFormCount] = useState(Number(localStorage.getItem("j")));
   const [educationData, setEducationData] = useState({});
@@ -83,17 +88,68 @@ function EducationPage() {
         }
 
         <button onClick={addComponent} className={classes.btnadd}>
-          მეტი გამოცდილების დამატება
+          მეტი სასწავლებლის დამატება
         </button>
         <div className={classes.links}>
-          <Link to={"/personal"} className={classes.backLink}>
+          <Link to={"/experience"} className={classes.backLink}>
             <span>უკან</span>
           </Link>
-          <Link to={"/education"} className={classes.nextLink}>
+          <Link to={"/final-resume"} className={classes.nextLink}>
             <span>შემდეგი</span>
           </Link>
         </div>
       </section>
+      <div className="cv-container">
+        <div>
+          <CV
+            firstname={localStorage.getItem("inputedFirstname")}
+            lastname={localStorage.getItem("inputedLastname")}
+            image={localStorage.getItem("photo")}
+            basicinfo={localStorage.getItem("basicinfo")}
+            email={localStorage.getItem("email")}
+            number={localStorage.getItem("number")}
+            data={Object.keys(localStorage)}
+          ></CV>
+          {
+            (arr2 = Array(Number(localStorage.getItem("i")))
+              .fill(1)
+              .map((_, index) => (
+                <>
+                  {
+                    <ExperienceCV
+                      position={localStorage.getItem(`positionInfo${index}`)}
+                      employer={localStorage.getItem(`employer${index}`)}
+                      startdate={localStorage.getItem(`startDate${index}`)}
+                      enddate={localStorage.getItem(`endDate${index}`)}
+                      description={localStorage.getItem(`description${index}`)}
+                      index={index}
+                    ></ExperienceCV>
+                  }
+                </>
+              )))
+          }
+          {
+            (arr = Array(Number(localStorage.getItem("j")))
+              .fill(1)
+              .map((_, index) => (
+                <>
+                  {
+                    <EducationCV
+                      place={localStorage.getItem(`place${index}`)}
+                      degree={localStorage.getItem(`degree${index}`)}
+                      finishDate={localStorage.getItem(`finishDate${index}`)}
+                      description={localStorage.getItem(
+                        `educationDescription${index}`
+                      )}
+                      index={index}
+                    ></EducationCV>
+                  }
+                </>
+              )))
+          }
+        </div>
+        <img className={classes.star} src={star} alt="" />
+      </div>
     </main>
   );
 }

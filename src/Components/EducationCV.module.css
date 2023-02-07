@@ -1,31 +1,29 @@
-.expHeader {
+.eduHeader {
   color: #f93b1d;
   font-size: 18px;
   font-weight: 700;
 }
-.expContainer {
+.eduContainer {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin: 20px 0 40px;
+  margin: 20px 0 40px 0;
 }
-.positionContainer {
+.degreeContainer {
   display: flex;
 }
-.positionContainer p {
+.degreeContainer p {
   font-size: 16px;
   font-weight: 500;
   color: #000;
 }
-.dates {
-  display: flex;
-}
-.dates p {
+
+.date {
   font-size: 16px;
   font-weight: 400;
   color: #909090;
 }
-.expAndDates {
+.degreeAndDate {
   display: flex;
   flex-direction: column;
   gap: 8px;
