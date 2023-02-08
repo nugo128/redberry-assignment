@@ -70,7 +70,10 @@ function ExperiencePage() {
           </Link>
           <div className={classes.pagename}>
             <h2>გამოცდილება</h2>
-            <p>2/3</p>
+            <p>
+              {1 + Number(localStorage.getItem("i"))}/
+              {2 + Number(localStorage.getItem("i"))}
+            </p>
           </div>
           <Line></Line>
         </section>

@@ -65,9 +65,8 @@ function PersonalPage(props) {
     localStorage.setItem("email", input.email);
   }
   if (input.number) {
-    localStorage.setItem("number", input.number.toString());
+    localStorage.setItem("number", input.number);
   }
-
   if (file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -82,11 +81,8 @@ function PersonalPage(props) {
   };
   const checkGeo = /^[ა-ჰ]{2,}$/;
   const checkMail = /^[a-zA-Z0-9.]+@redberry.ge$/;
-  // const checkPhone = /^\995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/;
-  const pattern = new RegExp(
-    "^\\+995 5[5-9][0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
-  );
-  // console.log(pattern.test("+995 551 11 12 13"));
+  const pattern = /^\+995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/;
+  console.log("22w" + pattern.test("+995 591 11 12 13"));
   useEffect(() => {
     let inputedMail = localStorage.getItem("email");
     let inputedFName = localStorage.getItem("inputedFirstname");
@@ -97,12 +93,8 @@ function PersonalPage(props) {
     setNameIsValid(checkGeo.test(inputedFName));
     setLastNameIsValid(checkGeo.test(inputedLName));
     setPhotoIsValid(inputedPhoto);
-    // setNumberIsValid(checkPhone.test(Number(inputedNumber)));
-  }, [input.nameInput, input.lastnameInput, input.email]);
-
-  // console.log(emailIsValid, "==email");
-  // console.log(nameIsValid, "==www");
-  console.log("L-", numberIsValid);
+    setNumberIsValid(pattern.test(inputedNumber));
+  }, [input.nameInput, input.lastnameInput, input.email, input.number]);
 
   return (
     <main className={classes.maincontainer}>
@@ -140,6 +132,7 @@ function PersonalPage(props) {
                 onFocus={focusHandler}
                 onBlur={focusHandler}
                 Value={localStorage.getItem("inputedFirstname")}
+                required
                 className={
                   !focusedName
                     ? ""
@@ -259,7 +252,7 @@ function PersonalPage(props) {
               onBlur={focusHandler}
               required
               placeholder="anzorr666@redberry.ge"
-              value={localStorage.getItem("email")}
+              Value={localStorage.getItem("email")}
               className={
                 !focusedEmail
                   ? ""
@@ -281,19 +274,60 @@ function PersonalPage(props) {
             <p>უნდა მთავრდებოდეს @redberry.ge-ით</p>
           </div>
           <div className={classes.phone}>
-            <label htmlFor="number">მობილურის ნომერი</label>
+            <label
+              htmlFor="number"
+              className={
+                !focusedLName
+                  ? ""
+                  : numberIsValid
+                  ? ""
+                  : classes.invalidNumberLabel
+              }
+            >
+              მობილურის ნომერი
+            </label>
             <input
               name="number"
-              type="number"
+              type="text"
+              onFocus={focusHandler}
+              onBlur={focusHandler}
               onChange={changeHandler}
+              Value={localStorage.getItem("number")}
               required
               placeholder="+995 551 12 34 56"
+              className={
+                !focusedNumber
+                  ? ""
+                  : numberIsValid
+                  ? classes.validNumber
+                  : classes.invalidNumber
+              }
             />
             <p>უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს</p>
+            <img
+              src={invalid}
+              className={
+                !focusedNumber
+                  ? classes.validNumberLogo
+                  : !numberIsValid
+                  ? classes.invalidNumberLogo
+                  : classes.validNumberLogo
+              }
+            />
           </div>
-          <Link className={classes.btn} to={"/experience"}>
-            <span>შემდეგი</span>
-          </Link>
+          {nameIsValid &&
+          lastNameIsValid &&
+          photoIsValid &&
+          emailIsValid &&
+          numberIsValid ? (
+            <Link className={classes.btn} to={"/experience"}>
+              <span>შემდეგი</span>
+            </Link>
+          ) : (
+            <button className={classes.btn}>
+              <span>შემდეგი</span>
+            </button>
+          )}
         </form>
         {/* <p>{localStorage.getItem("inputedFirstname2")}</p> */}
         {/* <p>{data}</p> */}

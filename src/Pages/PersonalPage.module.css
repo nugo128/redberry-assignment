@@ -117,6 +117,8 @@
   width: 150px;
   height: 50px;
   border-radius: 4px;
+  border: none;
+  cursor: pointer;
 }
 .btn span {
   display: block;
@@ -159,7 +161,8 @@
 }
 .validName,
 .validLName,
-.validEmail {
+.validEmail,
+.validNumber {
   border: 1px solid #98e37e;
   background: url("../images/valid.png");
   background-repeat: no-repeat;
@@ -168,9 +171,11 @@
 }
 .invalidName,
 .invalidLName,
-.invalidEmail {
+.invalidEmail,
+.invalidNumber {
   border: 1px solid #ef5050;
 }
+
 .invalidNameLogo {
   width: 21px;
   position: absolute;
@@ -179,12 +184,14 @@
 }
 .invalidNameLabel,
 .invalidLNameLabel,
-.invalidEmailLabel {
+.invalidEmailLabel,
+.invalidNumberLabel {
   color: #e52f2f;
 }
 .validNameLogo,
 .validLNameLogo,
-.validEmailLogo {
+.validEmailLogo,
+.validNumberLogo {
   display: none;
 }
 
@@ -199,6 +206,12 @@
   position: absolute;
   left: 960px;
   top: 630px;
+}
+.invalidNumberLogo {
+  width: 21px;
+  position: absolute;
+  left: 960px;
+  top: 760px;
 }
 .showImg {
   width: 21px;
