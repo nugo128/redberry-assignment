@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import classes from "./PersonalPage.module.css";
 import CV from "../Components/CV";
 import Line from "../Components/Line";
@@ -8,13 +7,39 @@ import SVG from "../Components/SVG";
 import ExperienceCV from "../Components/ExperienceCV";
 import star from "../images/star.png";
 import EducationCV from "../Components/EducationCV";
+import invalid from "../images/invalid.png";
+import valid from "../images/valid.png";
 function PersonalPage(props) {
   const [input, setInput] = useState({});
-  const { register, handleSubmit, errors } = useForm();
+
   const [file, setFile] = useState(null);
+  const [nameIsValid, setNameIsValid] = useState(false);
+  const [lastNameIsValid, setLastNameIsValid] = useState(false);
+  const [photoIsValid, setPhotoIsValid] = useState(false);
+  const [emailIsValid, setEmailIsValid] = useState(false);
+  const [numberIsValid, setNumberIsValid] = useState(false);
+
+  const [focusedName, setFocusedName] = useState(
+    localStorage.getItem("inputedFirstname")
+  );
+  const [focusedLName, setFocusedLName] = useState(
+    localStorage.getItem("inputedLastname")
+  );
+  const [focusedEmail, setFocusedEmail] = useState(
+    localStorage.getItem("email")
+  );
+  const [focusedNumber, setFocusedNumber] = useState(
+    localStorage.getItem("number")
+  );
+
   let arr = [];
   let arr2 = [];
-
+  const focusHandler = () => {
+    setFocusedName(true);
+    setFocusedLName(true);
+    setFocusedEmail(true);
+    setFocusedNumber(true);
+  };
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
     props.data = { file };
@@ -24,7 +49,6 @@ function PersonalPage(props) {
       ...input,
       [e.target.name]: e.target.value,
     });
-    console.log(errors);
   };
 
   if (input.nameInput) {
@@ -41,7 +65,7 @@ function PersonalPage(props) {
     localStorage.setItem("email", input.email);
   }
   if (input.number) {
-    localStorage.setItem("number", input.number);
+    localStorage.setItem("number", input.number.toString());
   }
 
   if (file) {
@@ -56,8 +80,29 @@ function PersonalPage(props) {
   const backClickHandler = () => {
     localStorage.clear();
   };
+  const checkGeo = /^[ა-ჰ]{2,}$/;
+  const checkMail = /^[a-zA-Z0-9.]+@redberry.ge$/;
+  // const checkPhone = /^\995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/;
+  const pattern = new RegExp(
+    "^\\+995 5[5-9][0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}$"
+  );
+  // console.log(pattern.test("+995 551 11 12 13"));
+  useEffect(() => {
+    let inputedMail = localStorage.getItem("email");
+    let inputedFName = localStorage.getItem("inputedFirstname");
+    let inputedLName = localStorage.getItem("inputedLastname");
+    let inputedPhoto = localStorage.getItem("photo");
+    let inputedNumber = localStorage.getItem("number");
+    setEmailIsValid(checkMail.test(inputedMail));
+    setNameIsValid(checkGeo.test(inputedFName));
+    setLastNameIsValid(checkGeo.test(inputedLName));
+    setPhotoIsValid(inputedPhoto);
+    // setNumberIsValid(checkPhone.test(Number(inputedNumber)));
+  }, [input.nameInput, input.lastnameInput, input.email]);
 
-  // let a =  /^\+995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/ tel validation
+  // console.log(emailIsValid, "==email");
+  // console.log(nameIsValid, "==www");
+  console.log("L-", numberIsValid);
 
   return (
     <main className={classes.maincontainer}>
@@ -75,24 +120,87 @@ function PersonalPage(props) {
         <form>
           <div className={classes.firstLastContainer}>
             <div className={classes.firstname}>
-              <label htmlFor="nameInput">სახელი</label>
+              <label
+                htmlFor="nameInput"
+                className={
+                  !focusedName
+                    ? ""
+                    : nameIsValid
+                    ? classes.validNameLabel
+                    : classes.invalidNameLabel
+                }
+              >
+                სახელი
+              </label>
               <input
                 name="nameInput"
                 type="text"
                 onChange={changeHandler}
                 placeholder="ანზორ"
-                defaultValue={localStorage.getItem("inputedFirstname")}
+                onFocus={focusHandler}
+                onBlur={focusHandler}
+                Value={localStorage.getItem("inputedFirstname")}
+                className={
+                  !focusedName
+                    ? ""
+                    : nameIsValid
+                    ? classes.validName
+                    : classes.invalidName
+                }
               />
+
+              <img
+                src={invalid}
+                className={
+                  !focusedName
+                    ? classes.validNameLogo
+                    : !nameIsValid
+                    ? classes.invalidNameLogo
+                    : classes.validNameLogo
+                }
+              />
+
               <p>მინუმუმ 2 ასო, ქართული ასოები</p>
             </div>
             <div className={classes.lastname}>
-              <label htmlFor="lastnameInput">გვარი</label>
+              <label
+                htmlFor="lastnameInput"
+                className={
+                  !focusedLName
+                    ? ""
+                    : lastNameIsValid
+                    ? classes.validLNameLabel
+                    : classes.invalidLNameLabel
+                }
+              >
+                გვარი
+              </label>
               <input
                 name="lastnameInput"
                 type="text"
                 onChange={changeHandler}
                 placeholder="მუმლაძე"
                 required
+                onFocus={focusHandler}
+                onBlur={focusHandler}
+                Value={localStorage.getItem("inputedLastname")}
+                className={
+                  !focusedLName
+                    ? ""
+                    : lastNameIsValid
+                    ? classes.validLName
+                    : classes.invalidLName
+                }
+              />
+              <img
+                src={invalid}
+                className={
+                  !focusedLName
+                    ? classes.validLNameLogo
+                    : !lastNameIsValid
+                    ? classes.invalidLNameLogo
+                    : classes.validLNameLogo
+                }
               />
               <p>მინუმუმ 2 ასო, ქართული ასოები</p>
             </div>
@@ -110,24 +218,65 @@ function PersonalPage(props) {
                 required
               />
             </label>
+            <img
+              src={photoIsValid ? valid : invalid}
+              className={
+                photoIsValid || focusedName || focusedLName
+                  ? classes.showImg
+                  : classes.hideImg
+              }
+            />
           </div>
 
           <div className={classes.aboutme}>
-            <label htmlFor="">ჩემ შესახებ(არასავალდებულო)</label>
+            <label htmlFor="">ჩემ შესახებ (არასავალდებულო)</label>
             <textarea
+              onFocus={focusHandler}
+              onBlur={focusHandler}
               name="basicinfo"
               onChange={changeHandler}
               placeholder="ზოგადი ტექსტი შენ შესახებ"
             ></textarea>
           </div>
           <div className={classes.email}>
-            <label htmlFor="email">ელ-ფოსტა</label>
+            <label
+              htmlFor="email"
+              className={
+                !focusedEmail
+                  ? ""
+                  : emailIsValid
+                  ? classes.validEmailLabel
+                  : classes.invalidEmailLabel
+              }
+            >
+              ელ-ფოსტა
+            </label>
             <input
               name="email"
-              type="email"
+              type="text"
               onChange={changeHandler}
+              onFocus={focusHandler}
+              onBlur={focusHandler}
               required
               placeholder="anzorr666@redberry.ge"
+              value={localStorage.getItem("email")}
+              className={
+                !focusedEmail
+                  ? ""
+                  : emailIsValid
+                  ? classes.validEmail
+                  : classes.invalidEmail
+              }
+            />
+            <img
+              src={invalid}
+              className={
+                !focusedEmail
+                  ? classes.validEmailLogo
+                  : !emailIsValid
+                  ? classes.invalidEmailLogo
+                  : classes.validEmailLogo
+              }
             />
             <p>უნდა მთავრდებოდეს @redberry.ge-ით</p>
           </div>

@@ -42,6 +42,8 @@
 .lastname input {
   width: 370px;
   height: 48px;
+  outline: none;
+  /* border: 1px solid black; */
 }
 
 .firstname label,
@@ -81,6 +83,7 @@
 .aboutme textarea {
   width: 100%;
   height: 100px;
+  outline: none;
 }
 .email,
 .phone {
@@ -92,6 +95,7 @@
 .email input,
 .phone input {
   height: 50px;
+  outline: none;
 }
 .phone input::-webkit-outer-spin-button,
 .phone input::-webkit-inner-spin-button {
@@ -152,4 +156,56 @@
   align-self: flex-start;
   width: 42px;
   height: 42px;
+}
+.validName,
+.validLName,
+.validEmail {
+  border: 1px solid #98e37e;
+  background: url("../images/valid.png");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+.invalidName,
+.invalidLName,
+.invalidEmail {
+  border: 1px solid #ef5050;
+}
+.invalidNameLogo {
+  width: 21px;
+  position: absolute;
+  left: 530px;
+  top: 245px;
+}
+.invalidNameLabel,
+.invalidLNameLabel,
+.invalidEmailLabel {
+  color: #e52f2f;
+}
+.validNameLogo,
+.validLNameLogo,
+.validEmailLogo {
+  display: none;
+}
+
+.invalidLNameLogo {
+  width: 21px;
+  position: absolute;
+  left: 960px;
+  top: 245px;
+}
+.invalidEmailLogo {
+  width: 21px;
+  position: absolute;
+  left: 960px;
+  top: 630px;
+}
+.showImg {
+  width: 21px;
+  position: absolute;
+  left: 530px;
+  top: 357px;
+}
+.hideImg {
+  display: none;
 }
