@@ -13,6 +13,7 @@
 .position input,
 .employer input {
   height: 48px;
+  outline: none;
 }
 
 .position label,
@@ -54,4 +55,33 @@
 }
 .line {
   border: 1px solid #c1c1c1;
+}
+.validPlace,
+.validEmployer {
+  border: 1px solid #98e37e;
+  background: url("../images/valid.png");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+.invalidPlace,
+.invalidEmployer {
+  border: 1px solid #ef5050;
+}
+.validPlaceLogo,
+.validEmployerLogo {
+  display: none;
+}
+
+.invalidPlaceLogo,
+.invalidEmployerLogo {
+  width: 21px;
+  position: absolute;
+  float: right;
+  margin-top: 38px;
+  margin-left: 820px;
+}
+.invalidPlaceLabel,
+.invalidEmployerLabel {
+  color: #e52f2f;
 }

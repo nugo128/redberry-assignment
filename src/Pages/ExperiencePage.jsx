@@ -13,10 +13,13 @@ import EducationCV from "../Components/EducationCV";
 function ExperiencePage() {
   let arr = [];
   let arr2 = [];
+
   const [input, setInput] = useState({});
   const [formCount, setFormCount] = useState(Number(localStorage.getItem("i")));
   const [experienceData, setExperienceData] = useState({});
   const [keys, setKeys] = useState([]);
+  const [focusedform, setFocuseForm] = useState(true);
+  const [focused, setFocused] = useState([]);
 
   if (!Number(localStorage.getItem("i"))) {
     setFormCount(1);
@@ -51,16 +54,37 @@ function ExperiencePage() {
       if (input[`description${i}`]) {
         localStorage.setItem(`description${i}`, input[`description${i}`]);
       }
+
+      // setFocuseForm(JSON.stringify(data));
+      // Array(JSON.parse(focusedform)).map((val, index) => {
+      //   console.log("lalalal");
+      //   console.log(index);
+      //   console.log(val.length);
+      // });
+
+      // console.log("frmcnt" + formCount);
+      Array(JSON.parse(focusedform)).map((val, index) => {
+        let arr = [];
+        // console.log(index);
+        // console.log("lalalal");
+        for (let i = 0; i < val.length; i++) {
+          arr.push(val[i]);
+        }
+
+        setFocused(arr);
+        // console.log(focused);
+      });
     }
     setKeys(Object.keys(localStorage));
-    console.log(keys);
   }, [input]);
   localStorage.setItem("i", formCount);
   const addComponent = () => {
+    // setFocuseForm(JSON.stringify(data));
     setFormCount(formCount + 1);
     localStorage.setItem("i", formCount);
   };
-
+  // console.log(JSON.parse(focusedform));
+  let pp = ["rame", "isa"];
   return (
     <main className={classes.main}>
       <section className={classes.formcontainer}>
@@ -97,9 +121,37 @@ function ExperiencePage() {
           <Link to={"/personal"} className={classes.backLink}>
             <span>უკან</span>
           </Link>
-          <Link to={"/education"} className={classes.nextLink}>
-            <span>შემდეგი</span>
-          </Link>
+
+          {/* {formCount > 1 && localStorage.getItem(`positionInfo${formCount}`) ? (
+            <Link to={"/education"} className={classes.nextLink}>
+              <span>შემდეგი</span>
+            </Link>
+          ) : (
+            <button className={classes.nextLink}>
+              <span>შემდეგი</span>
+            </button>
+          )} */}
+          {
+            (arr = Array(Number(localStorage.getItem("i")))
+              .fill(1)
+              .map((_, index) => (
+                <>
+                  {localStorage.getItem(`positionInfo${index}`)?.length > 1 &&
+                  localStorage.getItem(`employer${index}`)?.length > 1 &&
+                  localStorage.getItem(`startDate${index}`) &&
+                  localStorage.getItem(`endDate${index}`) &&
+                  localStorage.getItem(`description${index}`) ? (
+                    <Link to={"/education"} className={classes.nextLink}>
+                      <span>შემდეგი</span>
+                    </Link>
+                  ) : (
+                    <button className={classes.nextLink}>
+                      <span>შემდეგი</span>
+                    </button>
+                  )}
+                </>
+              )))
+          }
         </div>
       </section>
       <div className="cv-container">
