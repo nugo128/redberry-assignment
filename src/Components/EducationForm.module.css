@@ -43,3 +43,57 @@
   margin: 20px 0 40px 0;
   border: 1px solid #c1c1c1;
 }
+
+.validPlace,
+.validDegree,
+.validDate,
+.validdesc {
+  border: 1px solid #98e37e;
+  background: url("../images/valid.png");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 20px;
+  outline: none;
+}
+.invalidPlace,
+.invalidDegree,
+.invalidDate,
+.invaliddesc {
+  border: 1px solid #ef5050;
+  outline: none;
+}
+.invalidPlaceLabel,
+.invalidDegreeLabel,
+.invalidDateLabel,
+.invalidDescLabel {
+  color: #e52f2f;
+}
+.validPlaceLogo,
+.validDegreeLogo,
+.validDateLogo,
+.validddescLogo {
+  display: none;
+}
+
+.invalidPlaceLogo {
+  width: 21px;
+  position: absolute;
+  float: right;
+  margin-top: 38px;
+  margin-left: 820px;
+}
+.invalidddescLogo {
+  width: 21px;
+  position: absolute;
+  float: right;
+  margin-top: 110px;
+  margin-left: 820px;
+}
+.invalidDegreeLogo,
+.invalidDateLogo {
+  width: 21px;
+  position: absolute;
+  float: right;
+  margin-top: 38px;
+  margin-left: 385px;
+}

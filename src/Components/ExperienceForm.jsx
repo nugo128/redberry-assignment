@@ -4,6 +4,7 @@ import invalid from "../images/invalid.png";
 
 function ExperienceForm(props) {
   const [placeIsValid, setPlaceIsValid] = useState(false);
+
   const [focusedplace, setFocusedplace] = useState(
     localStorage.getItem(`positionInfo${props.index}`)
   );
@@ -24,17 +25,14 @@ function ExperienceForm(props) {
     localStorage.getItem(`description${props.index}`)
   );
 
-  const focusHandler = () => {
+  const focusHandler = (e) => {
+    console.log(e.target.value);
     setFocusedplace(true);
     setFocusEdemployer(true);
     setFocusedStartDate(true);
     setFocusedEndDate(true);
     setFocusEdDescription(true);
   };
-  localStorage.setItem(
-    `focusedplace${props.index}`,
-    focusedplace || focusedEmployer
-  );
   let place = localStorage.getItem(`positionInfo${props.index}`);
   let employer = localStorage.getItem(`employer${props.index}`);
   let startDate = localStorage.getItem(`startDate${props.index}`);
@@ -47,7 +45,7 @@ function ExperienceForm(props) {
     setStartDateIsValid(startDate);
     setEndDateIsValid(endDate);
     setDescriptionIsValid(description?.length > 1);
-  }, [place, employer, startDate, endDate, description]);
+  }, [place, employer, startDate, endDate, description, focusedEmployer]);
   // console.log(placeIsValid);
 
   return (
@@ -83,7 +81,7 @@ function ExperienceForm(props) {
           onFocus={focusHandler}
           onBlur={focusHandler}
           required
-          Value={place}
+          Value={localStorage.getItem(`positionInfo${props.index}`)}
           className={
             !focusedplace
               ? ""

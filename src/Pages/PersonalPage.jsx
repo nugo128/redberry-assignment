@@ -31,6 +31,9 @@ function PersonalPage(props) {
   const [focusedNumber, setFocusedNumber] = useState(
     localStorage.getItem("number")
   );
+  const [formatedPhone, setFormatedPhone] = useState(
+    localStorage.getItem("number")
+  );
 
   let arr = [];
   let arr2 = [];
@@ -65,7 +68,7 @@ function PersonalPage(props) {
     localStorage.setItem("email", input.email);
   }
   if (input.number) {
-    localStorage.setItem("number", input.number);
+    localStorage.setItem("number", formatedPhone);
   }
   if (file) {
     const reader = new FileReader();
@@ -82,20 +85,39 @@ function PersonalPage(props) {
   const checkGeo = /^[ა-ჰ]{2,}$/;
   const checkMail = /^[a-zA-Z0-9.]+@redberry.ge$/;
   const pattern = /^\+995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/;
-  console.log("22w" + pattern.test("+995 591 11 12 13"));
   useEffect(() => {
     let inputedMail = localStorage.getItem("email");
     let inputedFName = localStorage.getItem("inputedFirstname");
     let inputedLName = localStorage.getItem("inputedLastname");
     let inputedPhoto = localStorage.getItem("photo");
-    let inputedNumber = localStorage.getItem("number");
+
     setEmailIsValid(checkMail.test(inputedMail));
     setNameIsValid(checkGeo.test(inputedFName));
     setLastNameIsValid(checkGeo.test(inputedLName));
     setPhotoIsValid(inputedPhoto);
-    setNumberIsValid(pattern.test(inputedNumber));
   }, [input.nameInput, input.lastnameInput, input.email, input.number]);
-
+  useEffect(() => {
+    let result = input.number?.replace(/\s/g, "");
+    const phoneNumberPattern = /^(\+\d{3})(\d{3})(\d{2})(\d{2})(\d{2})$/;
+    const groups = phoneNumberPattern.exec(result);
+    if (groups) {
+      const formattedPhoneNumber = [
+        groups[1],
+        groups[2],
+        groups[3],
+        groups[4],
+        groups[5],
+      ].join(" ");
+      setFormatedPhone(formattedPhoneNumber);
+    } else {
+      setFormatedPhone(result);
+    }
+    console.log(formatedPhone);
+    setNumberIsValid(pattern.test(formatedPhone));
+    ((input.number?.length === 13 && !input.number?.includes(" ")) ||
+      input.number?.length === 17) &&
+      window.location.reload();
+  }, [input.number]);
   return (
     <main className={classes.maincontainer}>
       <section className={classes.formcontainer}>
@@ -228,6 +250,11 @@ function PersonalPage(props) {
               onBlur={focusHandler}
               name="basicinfo"
               onChange={changeHandler}
+              value={
+                input.basicinfo?.length > 0
+                  ? input.basicinfo
+                  : localStorage.getItem("basicinfo")
+              }
               placeholder="ზოგადი ტექსტი შენ შესახებ"
             ></textarea>
           </div>
@@ -292,7 +319,11 @@ function PersonalPage(props) {
               onFocus={focusHandler}
               onBlur={focusHandler}
               onChange={changeHandler}
-              Value={localStorage.getItem("number")}
+              Value={
+                formatedPhone?.length > 0
+                  ? formatedPhone
+                  : localStorage.getItem("number")
+              }
               required
               placeholder="+995 551 12 34 56"
               className={
@@ -335,12 +366,32 @@ function PersonalPage(props) {
       <div className="cv-container">
         <div>
           <CV
-            firstname={localStorage.getItem("inputedFirstname")}
-            lastname={localStorage.getItem("inputedLastname")}
+            firstname={
+              input.nameInput?.length > 0
+                ? input.nameInput
+                : localStorage.getItem("inputedFirstname")
+            }
+            lastname={
+              input.lastnameInput?.length > 0
+                ? input.lastnameInput
+                : localStorage.getItem("inputedLastname")
+            }
             image={localStorage.getItem("photo")}
-            basicinfo={localStorage.getItem("basicinfo")}
-            email={localStorage.getItem("email")}
-            number={localStorage.getItem("number")}
+            basicinfo={
+              input.basicinfo?.length > 0
+                ? input.basicinfo
+                : localStorage.getItem("basicinfo")
+            }
+            email={
+              input.email?.length > 0
+                ? input.email
+                : localStorage.getItem("email")
+            }
+            number={
+              formatedPhone?.length > 0
+                ? formatedPhone
+                : localStorage.getItem("number")
+            }
             data={Object.keys(localStorage)}
           ></CV>
 

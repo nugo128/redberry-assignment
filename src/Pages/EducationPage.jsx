@@ -14,8 +14,7 @@ function EducationPage() {
   let arr2 = [];
   const [input, setInput] = useState({});
   const [formCount, setFormCount] = useState(Number(localStorage.getItem("j")));
-  const [educationData, setEducationData] = useState({});
-  const [keys, setKeys] = useState([]);
+  const [formValid, setFormIsValid] = useState(false);
 
   if (!Number(localStorage.getItem("j"))) {
     setFormCount(1);
@@ -31,11 +30,9 @@ function EducationPage() {
     });
   };
   useEffect(() => {
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < formCount; i++) {
       if (input[`place${i}`]) {
         localStorage.setItem(`place${i}`, input[`place${i}`]);
-        // setExperienceData(localStorage.getItem(`positionInfo${i}`));
-        // console.log(experienceData);
       }
       if (input[`degree${i}`]) {
         localStorage.setItem(`degree${i}`, input[`degree${i}`]);
@@ -52,9 +49,30 @@ function EducationPage() {
         );
       }
     }
-    setKeys(Object.keys(localStorage));
-    console.log(keys);
-  }, [input]);
+    let a = Array(formCount + 1).fill(true);
+    for (let i = 0; i < formCount; i++) {
+      a[i] = Boolean(
+        localStorage.getItem(`place${i}`)?.length >= 2 &&
+          localStorage.getItem(`degree${i}`) &&
+          localStorage.getItem(`finishDate${i}`) &&
+          localStorage.getItem(`educationDescription${i}`)?.length > 1
+      );
+      if (i >= 1) {
+        if (
+          !localStorage.getItem(`place${i}`) &&
+          !localStorage.getItem(`degree${i}`) &&
+          !localStorage.getItem(`finishDate${i}`) &&
+          !localStorage.getItem(`educationDescription${i}`)
+        ) {
+          a[i] = true;
+        }
+      }
+    }
+
+    // const allTrue = arr.every((elem) => elem === true);
+    setFormIsValid(a.every((elem) => elem === true));
+    // console.log(formValid);
+  }, [input, arr, arr2, formCount]);
   localStorage.setItem("j", formCount);
   const addComponent = () => {
     setFormCount(formCount + 1);
@@ -69,7 +87,10 @@ function EducationPage() {
           </Link>
           <div className={classes.pagename}>
             <h2>განათლება</h2>
-            <p>3/3</p>
+            <p>
+              {Number(localStorage.getItem("i")) + formCount}/
+              {Number(localStorage.getItem("i")) + formCount + 1}
+            </p>
           </div>
           <Line></Line>
         </section>
@@ -94,9 +115,15 @@ function EducationPage() {
           <Link to={"/experience"} className={classes.backLink}>
             <span>უკან</span>
           </Link>
-          <Link to={"/final-resume"} className={classes.nextLink}>
-            <span>შემდეგი</span>
-          </Link>
+          {formValid ? (
+            <Link to={"/final-resume"} className={classes.nextLink}>
+              <span>დასრულება</span>
+            </Link>
+          ) : (
+            <button className={classes.nextLink}>
+              <span>დასრულება</span>
+            </button>
+          )}
         </div>
       </section>
       <div className="cv-container">
@@ -111,7 +138,7 @@ function EducationPage() {
             data={Object.keys(localStorage)}
           ></CV>
           {
-            (arr2 = Array(Number(localStorage.getItem("i")))
+            (arr = Array(Number(localStorage.getItem("i")))
               .fill(1)
               .map((_, index) => (
                 <>
@@ -129,18 +156,32 @@ function EducationPage() {
               )))
           }
           {
-            (arr = Array(Number(localStorage.getItem("j")))
+            (arr2 = Array(Number(localStorage.getItem("j")))
               .fill(1)
               .map((_, index) => (
                 <>
                   {
                     <EducationCV
-                      place={localStorage.getItem(`place${index}`)}
-                      degree={localStorage.getItem(`degree${index}`)}
-                      finishDate={localStorage.getItem(`finishDate${index}`)}
-                      description={localStorage.getItem(
-                        `educationDescription${index}`
-                      )}
+                      place={
+                        input[`place${index}`]?.length > 0
+                          ? input[`place${index}`]
+                          : localStorage.getItem(`place${index}`)
+                      }
+                      degree={
+                        input[`degree${index}`]?.length > 0
+                          ? input[`degree${index}`]
+                          : localStorage.getItem(`degree${index}`)
+                      }
+                      finishDate={
+                        input[`finishDate${index}`]?.length > 0
+                          ? input[`finishDate${index}`]
+                          : localStorage.getItem(`finishDate${index}`)
+                      }
+                      description={
+                        input[`educationDescription${index}`]?.length > 0
+                          ? input[`educationDescription${index}`]
+                          : localStorage.getItem(`educationDescription${index}`)
+                      }
                       index={index}
                     ></EducationCV>
                   }

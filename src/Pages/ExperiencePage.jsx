@@ -17,9 +17,7 @@ function ExperiencePage() {
   const [input, setInput] = useState({});
   const [formCount, setFormCount] = useState(Number(localStorage.getItem("i")));
   const [formValid, setFormIsValid] = useState(false);
-  const [keys, setKeys] = useState([]);
-  const [focusedform, setFocuseForm] = useState(true);
-  const [focused, setFocused] = useState([]);
+  const [positionInfo, setPositionInfo] = useState();
 
   if (!Number(localStorage.getItem("i"))) {
     setFormCount(1);
@@ -34,12 +32,18 @@ function ExperiencePage() {
       [e.target.name]: e.target.value,
     });
   };
+  function handleStorageChange(e) {
+    // Do something with the updated value
+    console.log(e);
+  }
   useEffect(() => {
+    // window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
+    console.log(positionInfo);
     for (let i = 0; i < arr.length; i++) {
+      let a = Array(formCount).fill(1);
       if (input[`positionInput${i}`]) {
-        localStorage.setItem(`positionInfo${i}`, input[`positionInput${i}`]);
-        // setExperienceData(localStorage.getItem(`positionInfo${i}`));
-        // console.log(experienceData);
+        localStorage?.setItem(`positionInfo${i}`, input[`positionInput${i}`]);
       }
       if (input[`employer${i}`]) {
         localStorage.setItem(`employer${i}`, input[`employer${i}`]);
@@ -55,26 +59,7 @@ function ExperiencePage() {
         localStorage.setItem(`description${i}`, input[`description${i}`]);
       }
 
-      // setFocuseForm(JSON.stringify(data));
-      // Array(JSON.parse(focusedform)).map((val, index) => {
-      //   console.log("lalalal");
-      //   console.log(index);
-      //   console.log(val.length);
-      // });
-
-      // console.log("frmcnt" + formCount);
-      Array(JSON.parse(focusedform)).map((val, index) => {
-        let arr = [];
-        // console.log(index);
-        // console.log("lalalal");
-
-        for (let i = 0; i < val.length; i++) {
-          arr.push(val[i]);
-        }
-
-        setFocused(arr);
-        // console.log(focused);
-      });
+      // setPositionInfo(localStorage.getItem(`positionInfo${i}`));
     }
     let a = Array(formCount + 1).fill(true);
     for (let i = 0; i < formCount; i++) {
@@ -146,16 +131,6 @@ function ExperiencePage() {
           <Link to={"/personal"} className={classes.backLink}>
             <span>უკან</span>
           </Link>
-
-          {/* {formCount > 1 && localStorage.getItem(`positionInfo${formCount}`) ? (
-            <Link to={"/education"} className={classes.nextLink}>
-              <span>შემდეგი</span>
-            </Link>
-          ) : (
-            <button className={classes.nextLink}>
-              <span>შემდეგი</span>
-            </button>
-          )} */}
           {formValid ? (
             <Link to={"/education"} className={classes.nextLink}>
               <span>შემდეგი</span>
@@ -185,11 +160,31 @@ function ExperiencePage() {
                 <>
                   {
                     <ExperienceCV
-                      position={localStorage.getItem(`positionInfo${index}`)}
-                      employer={localStorage.getItem(`employer${index}`)}
-                      startdate={localStorage.getItem(`startDate${index}`)}
-                      enddate={localStorage.getItem(`endDate${index}`)}
-                      description={localStorage.getItem(`description${index}`)}
+                      position={
+                        input[`positionInput${index}`]?.length > 0
+                          ? input[`positionInput${index}`]
+                          : localStorage.getItem(`positionInfo${index}`)
+                      }
+                      employer={
+                        input[`employer${index}`]?.length > 0
+                          ? input[`employer${index}`]
+                          : localStorage.getItem(`employer${index}`)
+                      }
+                      startdate={
+                        input[`startDate${index}`]?.length > 0
+                          ? input[`startDate${index}`]
+                          : localStorage.getItem(`startDate${index}`)
+                      }
+                      enddate={
+                        input[`endDate${index}`]?.length > 0
+                          ? input[`endDate${index}`]
+                          : localStorage.getItem(`endDate${index}`)
+                      }
+                      description={
+                        input[`description${index}`]?.length > 0
+                          ? input[`description${index}`]
+                          : localStorage.getItem(`description${index}`)
+                      }
                       index={index}
                     ></ExperienceCV>
                   }
