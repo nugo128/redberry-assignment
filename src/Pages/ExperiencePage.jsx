@@ -16,7 +16,7 @@ function ExperiencePage() {
 
   const [input, setInput] = useState({});
   const [formCount, setFormCount] = useState(Number(localStorage.getItem("i")));
-  const [experienceData, setExperienceData] = useState({});
+  const [formValid, setFormIsValid] = useState(false);
   const [keys, setKeys] = useState([]);
   const [focusedform, setFocuseForm] = useState(true);
   const [focused, setFocused] = useState([]);
@@ -67,6 +67,7 @@ function ExperiencePage() {
         let arr = [];
         // console.log(index);
         // console.log("lalalal");
+
         for (let i = 0; i < val.length; i++) {
           arr.push(val[i]);
         }
@@ -75,7 +76,31 @@ function ExperiencePage() {
         // console.log(focused);
       });
     }
-    setKeys(Object.keys(localStorage));
+    let a = Array(formCount + 1).fill(true);
+    for (let i = 0; i < formCount; i++) {
+      a[i] = Boolean(
+        localStorage.getItem(`employer${i}`)?.length >= 2 &&
+          localStorage.getItem(`positionInfo${i}`)?.length > 1 &&
+          localStorage.getItem(`startDate${i}`) &&
+          localStorage.getItem(`endDate${i}`) &&
+          localStorage.getItem(`description${i}`)?.length > 1
+      );
+      if (i >= 1) {
+        if (
+          !localStorage.getItem(`employer${i}`) &&
+          !localStorage.getItem(`positionInfo${i}`) &&
+          !localStorage.getItem(`startDate${i}`) &&
+          !localStorage.getItem(`endDate${i}`) &&
+          !localStorage.getItem(`description${i}`)
+        ) {
+          a[i] = true;
+        }
+      }
+    }
+
+    // const allTrue = arr.every((elem) => elem === true);
+    setFormIsValid(a.every((elem) => elem === true));
+    console.log(formValid);
   }, [input]);
   localStorage.setItem("i", formCount);
   const addComponent = () => {
@@ -84,7 +109,7 @@ function ExperiencePage() {
     localStorage.setItem("i", formCount);
   };
   // console.log(JSON.parse(focusedform));
-  let pp = ["rame", "isa"];
+
   return (
     <main className={classes.main}>
       <section className={classes.formcontainer}>
@@ -131,27 +156,15 @@ function ExperiencePage() {
               <span>შემდეგი</span>
             </button>
           )} */}
-          {
-            (arr = Array(Number(localStorage.getItem("i")))
-              .fill(1)
-              .map((_, index) => (
-                <>
-                  {localStorage.getItem(`positionInfo${index}`)?.length > 1 &&
-                  localStorage.getItem(`employer${index}`)?.length > 1 &&
-                  localStorage.getItem(`startDate${index}`) &&
-                  localStorage.getItem(`endDate${index}`) &&
-                  localStorage.getItem(`description${index}`) ? (
-                    <Link to={"/education"} className={classes.nextLink}>
-                      <span>შემდეგი</span>
-                    </Link>
-                  ) : (
-                    <button className={classes.nextLink}>
-                      <span>შემდეგი</span>
-                    </button>
-                  )}
-                </>
-              )))
-          }
+          {formValid ? (
+            <Link to={"/education"} className={classes.nextLink}>
+              <span>შემდეგი</span>
+            </Link>
+          ) : (
+            <button className={classes.nextLink}>
+              <span>შემდეგი</span>
+            </button>
+          )}
         </div>
       </section>
       <div className="cv-container">

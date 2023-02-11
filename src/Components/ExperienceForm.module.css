@@ -52,20 +52,31 @@
 }
 .description textarea {
   height: 125px;
+  outline: none;
 }
 .line {
   border: 1px solid #c1c1c1;
 }
 .validPlace,
-.validEmployer {
+.validEmployer,
+.validDescription {
   border: 1px solid #98e37e;
   background: url("../images/valid.png");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 20px;
 }
+.validStartDate {
+  border: 1px solid #98e37e;
+  background: url("../images/valid.png");
+  background-repeat: no-repeat;
+  background-position: right 25px center;
+  background-size: 20px;
+}
 .invalidPlace,
-.invalidEmployer {
+.invalidEmployer,
+.invalidStartDate,
+.invalidDescription {
   border: 1px solid #ef5050;
 }
 .validPlaceLogo,
@@ -74,14 +85,27 @@
 }
 
 .invalidPlaceLogo,
-.invalidEmployerLogo {
+.invalidEmployerLogo,
+.invalidEndDateLogo,
+.invalidDescriptionLogo {
   width: 21px;
   position: absolute;
   float: right;
   margin-top: 38px;
   margin-left: 820px;
 }
+.invalidDescriptionLogo {
+  margin-top: 70px;
+}
+.invalidStartDateLogo {
+  width: 21px;
+  position: absolute;
+  float: right;
+  margin-top: 38px;
+  margin-left: 385px;
+}
 .invalidPlaceLabel,
-.invalidEmployerLabel {
+.invalidEmployerLabel,
+.invalidStartDateLabel {
   color: #e52f2f;
 }

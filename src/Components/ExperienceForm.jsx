@@ -19,12 +19,17 @@ function ExperienceForm(props) {
   const [focusedEmployer, setFocusEdemployer] = useState(
     localStorage.getItem(`employer${props.index}`)
   );
+  const [descriptionIsValid, setDescriptionIsValid] = useState(false);
+  const [focusedDescription, setFocusEdDescription] = useState(
+    localStorage.getItem(`description${props.index}`)
+  );
 
   const focusHandler = () => {
     setFocusedplace(true);
     setFocusEdemployer(true);
     setFocusedStartDate(true);
     setFocusedEndDate(true);
+    setFocusEdDescription(true);
   };
   localStorage.setItem(
     `focusedplace${props.index}`,
@@ -34,14 +39,17 @@ function ExperienceForm(props) {
   let employer = localStorage.getItem(`employer${props.index}`);
   let startDate = localStorage.getItem(`startDate${props.index}`);
   let endDate = localStorage.getItem(`endDate${props.index}`);
+  let description = localStorage.getItem(`description${props.index}`);
 
   useEffect(() => {
     setPlaceIsValid(place?.length >= 2);
     setEmployerIsValid(employer?.length >= 2);
     setStartDateIsValid(startDate);
     setEndDateIsValid(endDate);
-  }, [place, employer, startDate, endDate]);
+    setDescriptionIsValid(description?.length > 1);
+  }, [place, employer, startDate, endDate, description]);
   // console.log(placeIsValid);
+
   return (
     <form className={classes.form}>
       <div className={classes.position}>
@@ -131,7 +139,28 @@ function ExperienceForm(props) {
       </div>
       <div className={classes.date}>
         <div className={classes.startdate}>
-          <label htmlFor="startDate">დაწყების რიცხვი</label>
+          <img
+            src={invalid}
+            className={
+              !focusedStartDate
+                ? classes.validEmployerLogo
+                : !startDateIsValid
+                ? classes.invalidStartDateLogo
+                : classes.validEmployerLogo
+            }
+          />
+          <label
+            htmlFor="startDate"
+            className={
+              !focusedEmployer
+                ? ""
+                : startDateIsValid
+                ? classes.validStartDateLabel
+                : classes.invalidStartDateLabel
+            }
+          >
+            დაწყების რიცხვი
+          </label>
           <input
             type="date"
             name={`startDate${props.index}`}
@@ -143,29 +172,91 @@ function ExperienceForm(props) {
               !focusedEmployer
                 ? ""
                 : startDateIsValid
-                ? classes.validEmployer
-                : classes.invalidEmployer
+                ? classes.validStartDate
+                : classes.invalidStartDate
             }
           />
         </div>
+        <img
+          src={invalid}
+          className={
+            !focusedEndDate
+              ? classes.validEmployerLogo
+              : !endDateIsValid
+              ? classes.invalidEndDateLogo
+              : classes.validEmployerLogo
+          }
+        />
         <div className={classes.enddate}>
-          <label htmlFor="endDate">დამთავრების რიცხვი</label>
+          <label
+            htmlFor="endDate"
+            className={
+              !focusedEmployer
+                ? ""
+                : endDateIsValid
+                ? classes.validStartDateLabel
+                : classes.invalidStartDateLabel
+            }
+          >
+            დამთავრების რიცხვი
+          </label>
           <input
             type="date"
             name={`endDate${props.index}`}
             id="endDate"
             onChange={props.changeHandler}
+            onFocus={focusHandler}
+            onBlur={focusHandler}
+            Value={endDate}
+            className={
+              !focusedEmployer
+                ? ""
+                : endDateIsValid
+                ? classes.validStartDate
+                : classes.invalidStartDate
+            }
           />
         </div>
       </div>
 
       <div className={classes.description}>
-        <label htmlFor="description">აღწერა</label>
+        <img
+          src={invalid}
+          className={
+            !focusedDescription
+              ? classes.validEmployerLogo
+              : !descriptionIsValid
+              ? classes.invalidDescriptionLogo
+              : classes.validEmployerLogo
+          }
+        />
+        <label
+          htmlFor="description"
+          className={
+            !focusedEmployer
+              ? ""
+              : descriptionIsValid
+              ? classes.validStartDateLabel
+              : classes.invalidStartDateLabel
+          }
+        >
+          აღწერა
+        </label>
         <textarea
           name={`description${props.index}`}
           id="description"
           onChange={props.changeHandler}
           placeholder="როლი თანამდებოდაზე და ზოგადი აღწერა"
+          onFocus={focusHandler}
+          onBlur={focusHandler}
+          Value={description}
+          className={
+            !focusedEmployer
+              ? ""
+              : descriptionIsValid
+              ? classes.validDescription
+              : classes.invalidDescription
+          }
         ></textarea>
       </div>
       <div className={classes.line}></div>
