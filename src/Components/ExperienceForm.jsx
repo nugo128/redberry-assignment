@@ -40,12 +40,21 @@ function ExperienceForm(props) {
   let description = localStorage.getItem(`description${props.index}`);
 
   useEffect(() => {
-    setPlaceIsValid(place?.length >= 2);
-    setEmployerIsValid(employer?.length >= 2);
+    setPlaceIsValid(place?.length > 1);
+    setEmployerIsValid(employer?.length > 1);
     setStartDateIsValid(startDate);
     setEndDateIsValid(endDate);
     setDescriptionIsValid(description?.length > 1);
-  }, [place, employer, startDate, endDate, description, focusedEmployer]);
+    console.log(props.inp);
+  }, [
+    place,
+    employer,
+    startDate,
+    endDate,
+    description,
+    focusedEmployer,
+    props.inp,
+  ]);
   // console.log(placeIsValid);
 
   return (
@@ -247,7 +256,7 @@ function ExperienceForm(props) {
           placeholder="როლი თანამდებოდაზე და ზოგადი აღწერა"
           onFocus={focusHandler}
           onBlur={focusHandler}
-          Value={description}
+          value={description}
           className={
             !focusedEmployer
               ? ""

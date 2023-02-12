@@ -117,6 +117,7 @@ function ExperiencePage() {
             .map((_, index) => (
               <>
                 <ExperienceForm
+                  inp={input}
                   key={index}
                   index={index}
                   changeHandler={changeHandler}

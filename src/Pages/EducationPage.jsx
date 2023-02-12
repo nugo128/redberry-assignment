@@ -116,7 +116,13 @@ function EducationPage() {
             <span>უკან</span>
           </Link>
           {formValid ? (
-            <Link to={"/final-resume"} className={classes.nextLink}>
+            <Link
+              to={"/final-resume"}
+              className={classes.nextLink}
+              onClick={() => {
+                window.position.reload();
+              }}
+            >
               <span>დასრულება</span>
             </Link>
           ) : (

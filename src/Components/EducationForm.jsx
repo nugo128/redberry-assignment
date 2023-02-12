@@ -142,7 +142,7 @@ function EducationForm(props) {
           >
             {showChoose && <option value="">აირჩიეთ ხარისხი</option>}
             {places.map((option) => (
-              <option key={option.id} value={option.title}>
+              <option key={option.id} id={option.id} value={option.title}>
                 {option.title}
               </option>
             ))}
@@ -180,7 +180,7 @@ function EducationForm(props) {
             onFocus={focusHandler}
             onBlur={focusHandler}
             required
-            Value={degree}
+            Value={finishedDate}
             className={
               !focusedFDate
                 ? ""
