@@ -35,7 +35,7 @@ function FinalResume(props) {
             <CV
               firstname={props.postData?.name}
               lastname={props.postData?.surname}
-              image={localStorage.getItem("photo")}
+              image={`https://resume.redberryinternship.ge${props.postData?.image}`}
               basicinfo={
                 props.postData?.about_me !== "null" && props.postData?.about_me
               }

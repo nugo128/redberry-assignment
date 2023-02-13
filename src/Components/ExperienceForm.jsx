@@ -141,7 +141,6 @@ function ExperienceForm(props) {
               : classes.invalidEmployer
           }
         />
-        {placeIsValid && <p>ერორიაააააააა</p>}
         <p>მინუმუმ 2 სიმბოო</p>
       </div>
       <div className={classes.date}>

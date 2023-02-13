@@ -7,7 +7,7 @@
   color: #f93b1d;
   font-size: 34px;
   font-weight: 700;
-  width: 160px;
+  max-width: 250px;
   word-wrap: break-word;
 }
 

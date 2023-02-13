@@ -117,6 +117,7 @@ function EducationPage() {
               to={"/final-resume"}
               className={classes.nextLink}
               onClick={() => {
+                // localStorage.clear();
                 window.position.reload();
               }}
             >
