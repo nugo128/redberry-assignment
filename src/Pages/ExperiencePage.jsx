@@ -104,10 +104,7 @@ function ExperiencePage() {
           </Link>
           <div className={classes.pagename}>
             <h2>გამოცდილება</h2>
-            <p>
-              {1 + Number(localStorage.getItem("i"))}/
-              {2 + Number(localStorage.getItem("i"))}
-            </p>
+            <p>2/3</p>
           </div>
           <Line></Line>
         </section>
@@ -192,6 +189,12 @@ function ExperiencePage() {
                 </>
               )))
           }
+          {(localStorage.getItem(`place0`) ||
+            localStorage.getItem(`degree0`) ||
+            localStorage.getItem(`finishDate0`) ||
+            localStorage.getItem(`educationDescription0`)) && (
+            <div className={classes.line}></div>
+          )}
           {
             (arr2 = Array(Number(localStorage.getItem("j")))
               .fill(1)

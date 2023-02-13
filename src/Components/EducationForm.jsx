@@ -34,11 +34,12 @@ function EducationForm(props) {
     };
     fetchData();
   }, []);
-  const focusHandler = () => {
+  const focusHandler = (e) => {
     setFocusedDegree(true);
     setFocusEdeducationDescription(true);
     setFocusedplace(true);
     setFocusedFDate(true);
+    console.log("ariqaaa" + e.target.name === `degree${props.index}`);
   };
   let place = localStorage.getItem(`place${props.index}`);
   let degree = localStorage.getItem(`degree${props.index}`);

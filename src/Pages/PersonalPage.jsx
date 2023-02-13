@@ -360,8 +360,6 @@ function PersonalPage(props) {
             </button>
           )}
         </form>
-        {/* <p>{localStorage.getItem("inputedFirstname2")}</p> */}
-        {/* <p>{data}</p> */}
       </section>
       <div className="cv-container">
         <div>
@@ -408,11 +406,18 @@ function PersonalPage(props) {
                       enddate={localStorage.getItem(`endDate${index}`)}
                       description={localStorage.getItem(`description${index}`)}
                       index={index}
+                      key={index}
                     ></ExperienceCV>
                   }
                 </>
               )))
           }
+          {(localStorage.getItem(`place0`) ||
+            localStorage.getItem(`degree0`) ||
+            localStorage.getItem(`finishDate0`) ||
+            localStorage.getItem(`educationDescription0`)) && (
+            <div className={classes.line}></div>
+          )}
           {
             (arr2 = Array(Number(localStorage.getItem("j")))
               .fill(1)
@@ -427,6 +432,7 @@ function PersonalPage(props) {
                         `educationDescription${index}`
                       )}
                       index={index}
+                      key={index}
                     ></EducationCV>
                   }
                 </>

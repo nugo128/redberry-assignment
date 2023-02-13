@@ -72,7 +72,7 @@ function EducationPage() {
     // const allTrue = arr.every((elem) => elem === true);
     setFormIsValid(a.every((elem) => elem === true));
     // console.log(formValid);
-  }, [input, arr, arr2, formCount]);
+  }, [input, arr, formCount]);
   localStorage.setItem("j", formCount);
   const addComponent = () => {
     setFormCount(formCount + 1);
@@ -87,10 +87,7 @@ function EducationPage() {
           </Link>
           <div className={classes.pagename}>
             <h2>განათლება</h2>
-            <p>
-              {Number(localStorage.getItem("i")) + formCount}/
-              {Number(localStorage.getItem("i")) + formCount + 1}
-            </p>
+            <p>3/3</p>
           </div>
           <Line></Line>
         </section>
@@ -161,6 +158,7 @@ function EducationPage() {
                 </>
               )))
           }
+          <div className={classes.line}></div>
           {
             (arr2 = Array(Number(localStorage.getItem("j")))
               .fill(1)

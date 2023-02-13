@@ -256,7 +256,7 @@ function ExperienceForm(props) {
           placeholder="როლი თანამდებოდაზე და ზოგადი აღწერა"
           onFocus={focusHandler}
           onBlur={focusHandler}
-          value={description}
+          Value={description}
           className={
             !focusedEmployer
               ? ""

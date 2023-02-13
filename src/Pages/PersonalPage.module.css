@@ -222,3 +222,6 @@
 .hideImg {
   display: none;
 }
+.line {
+  border: 1px solid #c8c8c8;
+}

@@ -29,11 +29,11 @@ function App() {
     let start_date = localStorage.getItem(`startDate${i}`);
     let due_date = localStorage.getItem(`endDate${i}`);
     let description = localStorage.getItem(`description${i}`);
-    formData.append(`experiences[${i}][position]`, position.toString());
-    formData.append(`experiences[${i}][employer]`, employer.toString());
-    formData.append(`experiences[${i}][start_date]`, start_date.toString());
-    formData.append(`experiences[${i}][due_date]`, due_date.toString());
-    formData.append(`experiences[${i}][description]`, description.toString());
+    formData.append(`experiences[${i}][position]`, position?.toString());
+    formData.append(`experiences[${i}][employer]`, employer?.toString());
+    formData.append(`experiences[${i}][start_date]`, start_date?.toString());
+    formData.append(`experiences[${i}][due_date]`, due_date?.toString());
+    formData.append(`experiences[${i}][description]`, description?.toString());
   }
   for (let i = 0; i < eduCount; i++) {
     let institute = localStorage.getItem(`place${i}`);
@@ -41,15 +41,19 @@ function App() {
     let due_date = localStorage.getItem(`finishDate${i}`);
     let description = localStorage.getItem(`educationDescription${i}`);
 
-    formData.append(`educations[${i}][institute]`, institute.toString());
+    formData.append(`educations[${i}][institute]`, institute?.toString());
     // formData.append(`educations[${i}][degree]`, degree.toString());
     formData.append(`educations[${i}][degree_id]`, `${i + 1}`);
-    formData.append(`educations[${i}][due_date]`, due_date.toString());
-    formData.append(`educations[${i}][description]`, description.toString());
+    formData.append(`educations[${i}][due_date]`, due_date?.toString());
+    formData.append(`educations[${i}][description]`, description?.toString());
   }
 
-  let num = inputedNumber.replace(/\s/g, "");
+  let num = inputedNumber?.replace(/\s/g, "");
   function dataURLtoFile(dataurl, filename) {
+    if (!dataurl) {
+      return null;
+    }
+
     const arr = dataurl.split(",");
     const mime = arr[0].match(/:(.*?);/)[1];
     const bstr = atob(arr[1]);
@@ -62,7 +66,7 @@ function App() {
     return new File([blob], filename);
   }
 
-  const file = dataURLtoFile(inputedPhoto, "image.png");
+  const file = dataURLtoFile(inputedPhoto && inputedPhoto, "image.png");
   // console.log("file: " + file);
   formData.append("name", inputedFName);
   formData.append("surname", inputedLName);

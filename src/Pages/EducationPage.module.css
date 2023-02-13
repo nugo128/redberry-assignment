@@ -11,6 +11,9 @@
   flex-direction: column;
   margin-bottom: 70px;
 }
+.line {
+  border: 1px solid #c8c8c8;
+}
 .svg {
   position: absolute;
   left: 50px;

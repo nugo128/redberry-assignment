@@ -41,6 +41,9 @@
   height: 50px;
   margin-top: 50px;
 }
+.line {
+  border: 1px solid #c8c8c8;
+}
 .star {
   justify-self: flex-end;
   align-self: flex-start;
