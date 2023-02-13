@@ -32,13 +32,10 @@ function ExperiencePage() {
       [e.target.name]: e.target.value,
     });
   };
-  function handleStorageChange(e) {
-    // Do something with the updated value
-    console.log(e);
-  }
+
   useEffect(() => {
     // window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("storage", handleStorageChange);
+    // window.addEventListener("storage", handleStorageChange);
     console.log(positionInfo);
     for (let i = 0; i < arr.length; i++) {
       let a = Array(formCount).fill(1);

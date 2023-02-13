@@ -112,7 +112,7 @@ function PersonalPage(props) {
     } else {
       setFormatedPhone(result);
     }
-    console.log(formatedPhone);
+
     setNumberIsValid(pattern.test(formatedPhone));
     ((input.number?.length === 13 && !input.number?.includes(" ")) ||
       input.number?.length === 17) &&

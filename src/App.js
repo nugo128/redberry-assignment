@@ -23,12 +23,36 @@ function App() {
 
   const formData = new FormData();
 
+  console.log("manamde" + expCount);
+  for (let i = 0; i < expCount; i++) {
+    if (
+      !localStorage.getItem(`positionInfo${i}`) &&
+      !localStorage.getItem(`employer${i}`) &&
+      !localStorage.getItem(`startDate${i}`) &&
+      !localStorage.getItem(`endDate${i}`) &&
+      !localStorage.getItem(`description${i}`)
+    ) {
+      expCount = expCount - 1;
+    }
+  }
+  for (let i = 0; i < eduCount; i++) {
+    if (
+      !localStorage.getItem(`place${i}`) &&
+      !localStorage.getItem(`degree${i}`) &&
+      !localStorage.getItem(`finishDate${i}`) &&
+      !localStorage.getItem(`educationDescription${i}`)
+    ) {
+      eduCount = eduCount - 1;
+    }
+  }
+  console.log("axla" + expCount);
   for (let i = 0; i < expCount; i++) {
     let position = localStorage.getItem(`positionInfo${i}`);
     let employer = localStorage.getItem(`employer${i}`);
     let start_date = localStorage.getItem(`startDate${i}`);
     let due_date = localStorage.getItem(`endDate${i}`);
     let description = localStorage.getItem(`description${i}`);
+
     formData.append(`experiences[${i}][position]`, position?.toString());
     formData.append(`experiences[${i}][employer]`, employer?.toString());
     formData.append(`experiences[${i}][start_date]`, start_date?.toString());
